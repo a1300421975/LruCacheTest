@@ -1,5 +1,5 @@
 /*
-package com.example.tkw.lrucachetest;
+package com.example.tkw.lrucachetest.Cache;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;
@@ -25,8 +25,8 @@ public class SimpleImageLoader {
 
 
     private SimpleImageLoader(){
-        int maxMamery = (int) Runtime.getRuntime().maxMemory() / 1024;
-        int cacheSize = maxMamery / 8;
+        int maxMemory = (int) Runtime.getRuntime().maxMemory() / 1024;
+        int cacheSize = maxMemory / 8;
         lruCache = new LruCache<String, Bitmap>(cacheSize){
             @Override
             protected int sizeOf(String key, Bitmap value) {

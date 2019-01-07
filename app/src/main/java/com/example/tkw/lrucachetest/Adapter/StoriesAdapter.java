@@ -1,5 +1,7 @@
 package com.example.tkw.lrucachetest.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -20,16 +22,24 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.ViewHold
 
     private List<Stories> storiesList;
 
+    private Context context;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
+        View storiesView;
         ImageView storiesImage;
         TextView storiesTitle;
 
         public ViewHolder(View view){
             super(view);
+            storiesView = view;
             storiesImage = (ImageView) view.findViewById(R.id.title_image_view);
             storiesTitle = (TextView) view.findViewById(R.id.title_text_view);
         }
+    }
+
+    public StoriesAdapter(Context context){
+        this.context = context;
+
     }
 
     public void setStoriesList(List<Stories> storiesList) {
@@ -40,8 +50,16 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.stories_item,viewGroup,false);
-        ViewHolder holder = new ViewHolder(view);
-
+        final ViewHolder holder = new ViewHolder(view);
+        holder.storiesView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                Intent intent = new Intent("com.example.activitytest.ACTION_START");
+                intent.putExtra("stories_url",storiesList.get(position).getStories_address());
+                context.startActivity(intent);
+            }
+        });
         return holder;
     }
 

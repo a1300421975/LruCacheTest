@@ -2,12 +2,12 @@
 <RelativeLayout
     android:id="@+id/rotation_relative_layout"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="180dp">
+    android:layout_height="200dp">
 
     <ImageView
         android:id="@+id/rotation_image_view"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"/>
 
         <LinearLayout

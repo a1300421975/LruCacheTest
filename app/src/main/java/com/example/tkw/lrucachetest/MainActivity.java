@@ -21,6 +21,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -42,9 +43,6 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity<MainPresenter> implements IGetData {
 
-    /**
-     * RecyclerView部分
-     */
     RecyclerView storiesRecyclerView = null;
 
     StoriesAdapter storiesAdapter = null;
@@ -57,12 +55,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IGetDat
 
     boolean canChange = true;
 
-    /**
-     * ViewPager部分
-     * @param savedInstanceState
-     */
     private ViewPager viewPager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,12 +71,15 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IGetDat
      * 初始化数据
      */
     public void init(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
+        setSupportActionBar(toolbar);
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
         presenter.getStore(Url + "latest");
         storiesRecyclerView = (RecyclerView) findViewById(R.id.stories_recycler_view);
         layoutManager = new LinearLayoutManager(this);
         storiesRecyclerView.setLayoutManager(layoutManager);
-        storiesAdapter = new StoriesAdapter();
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        storiesAdapter = new StoriesAdapter(this);
+
     }
     /**
      * 滑动到底部，加载数据

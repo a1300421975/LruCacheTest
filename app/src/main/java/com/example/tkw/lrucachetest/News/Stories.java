@@ -10,6 +10,16 @@ public class Stories {
 
     private int date;
 
+    private String stories_address;
+
+    public String getStories_address() {
+        return stories_address;
+    }
+
+    public void setStories_address(String stories_address) {
+        this.stories_address = stories_address;
+    }
+
     public int getDate() {
         return date;
     }
